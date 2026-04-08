@@ -1,4 +1,4 @@
-@extends('layouts.app')
+@extends('admin.layouts.app')
 @section('title', 'Dashboard')
 @section('content')
 <div class="animate__animated p-6" :class="[$store.app.animation]">

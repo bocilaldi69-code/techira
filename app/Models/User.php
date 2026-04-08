@@ -18,6 +18,21 @@ class User extends Authenticatable
      *
      * @var list<string>
      */
+    public function services() {
+    return $this->hasMany(Service::class);
+}
+
+public function portfolios() {
+    return $this->hasMany(Portfolio::class);
+}
+
+public function teams() {
+    return $this->hasMany(Team::class);
+}
+
+public function messages() {
+    return $this->hasMany(Message::class);
+}
     protected $fillable = [
         'name',
         'email',

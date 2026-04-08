@@ -1,17 +1,17 @@
 <?php
-
 namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
-use Illuminate\Http\Request;
 use App\Models\Portfolio;
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class PortfolioController extends Controller
 {
     public function index()
     {
-        $data = Portfolio::latest()->get();
-        return view('admin.portfolios.index', compact('data'));
+        $portfolios = Portfolio::latest()->paginate(10);
+        return view('admin.portfolios.index', compact('portfolios'));
     }
 
     public function create()
@@ -22,14 +22,13 @@ class PortfolioController extends Controller
     public function store(Request $request)
     {
         $request->validate([
-            'title' => 'required',
+            'title'       => 'required|string|max:255',
             'description' => 'required',
-            'image' => 'nullable|image'
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $data = $request->all();
+        $data = $request->only('title', 'description');
 
-        // upload gambar
         if ($request->hasFile('image')) {
             $data['image'] = $request->file('image')->store('portfolios', 'public');
         }
@@ -37,39 +36,49 @@ class PortfolioController extends Controller
         Portfolio::create($data);
 
         return redirect()->route('admin.portfolios.index')
-            ->with('success', 'Data berhasil ditambahkan');
+                         ->with('success', 'Portfolio berhasil ditambahkan!');
     }
 
-    public function edit($id)
+    public function show(Portfolio $portfolio)
     {
-        $data = Portfolio::findOrFail($id);
-        return view('admin.portfolios.edit', compact('data'));
+        return view('admin.portfolios.show', compact('portfolio'));
     }
 
-    public function update(Request $request, $id)
+    public function edit(Portfolio $portfolio)
+    {
+        return view('admin.portfolios.edit', compact('portfolio'));
+    }
+
+    public function update(Request $request, Portfolio $portfolio)
     {
         $request->validate([
-            'title' => 'required',
+            'title'       => 'required|string|max:255',
             'description' => 'required',
-            'image' => 'nullable|image'
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png|max:2048',
         ]);
 
-        $portfolio = Portfolio::findOrFail($id);
-        $data = $request->all();
+        $data = $request->only('title', 'description');
 
         if ($request->hasFile('image')) {
+            if ($portfolio->image) {
+                Storage::disk('public')->delete($portfolio->image);
+            }
             $data['image'] = $request->file('image')->store('portfolios', 'public');
         }
 
         $portfolio->update($data);
 
         return redirect()->route('admin.portfolios.index')
-            ->with('success', 'Data berhasil diupdate');
+                         ->with('success', 'Portfolio berhasil diupdate!');
     }
 
-    public function destroy($id)
+    public function destroy(Portfolio $portfolio)
     {
-        Portfolio::destroy($id);
-        return back()->with('success', 'Data berhasil dihapus');
+        if ($portfolio->image) {
+            Storage::disk('public')->delete($portfolio->image);
+        }
+        $portfolio->delete();
+        return redirect()->route('admin.portfolios.index')
+                         ->with('success', 'Portfolio berhasil dihapus!');
     }
 }

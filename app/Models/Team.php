@@ -20,4 +20,7 @@ class Team extends Model
     {
         return $this->photo ? asset('storage/' . $this->photo) : null;
     }
+    public function user() {
+    return $this->belongsTo(User::class);
+}
 }

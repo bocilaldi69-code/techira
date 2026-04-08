@@ -20,4 +20,12 @@ class Portfolio extends Model
     {
         return $this->image ? asset('storage/' . $this->image) : null;
     }
+    
+    public function user() {
+    return $this->belongsTo(User::class);
+}
+
+public function service() {
+    return $this->belongsTo(Service::class);
+}
 }

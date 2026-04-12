@@ -1,3 +1,18 @@
+@php
+    $company = $company ?? new \App\Models\CompanyProfile([
+        'company_name' => 'Techira Indonesia',
+        'tagline'      => 'Mitra Solusi Digital untuk Bisnis Anda',
+        'description'  => 'Techira Indonesia adalah perusahaan teknologi yang berfokus pada penyediaan solusi digital.',
+        'vision'       => 'Menjadi perusahaan teknologi terdepan dan terpercaya di Indonesia yang mampu memberikan dampak nyata bagi perkembangan bisnis.',
+        'mission'      => 'Menghadirkan solusi digital yang inovatif dan berkualitas.',
+    ]);
+    $services   = $services ?? collect();
+    $portfolios = $portfolios ?? collect();
+    $teams      = $teams ?? collect();
+@endphp
+
+
+
 <!DOCTYPE html>
 <html lang="id">
 
@@ -672,7 +687,7 @@ Membantu bisnis meningkatkan efisiensi dan produktivitas melalui teknologi' }}</
                             Ikuti Kami
                         </h5>
                         <div style="display: flex; gap: 10px;">
-                            <a href="#" style="
+                            <a href="https://facebook.com/aldisaefulnizar" target="_blank" style="
                                 width: 40px; height: 40px;
                                 border-radius: 10px;
                                 border: 1.5px solid #e2e8f0;
@@ -686,7 +701,7 @@ Membantu bisnis meningkatkan efisiensi dan produktivitas melalui teknologi' }}</
                                onmouseout="this.style.background='#f8fafc'; this.style.color='#64748b';">
                                 <i class="fa fa-facebook"></i>
                             </a>
-                            <a href="#" style="
+                            <a href="https://youtube.com/@jamet1572" target="_blank" style="
                                 width: 40px; height: 40px;
                                 border-radius: 10px;
                                 border: 1.5px solid #e2e8f0;
@@ -697,9 +712,9 @@ Membantu bisnis meningkatkan efisiensi dan produktivitas melalui teknologi' }}</
                                 font-size: 0.9rem;
                             " onmouseover="this.style.background='#F5C41A'; this.style.color='#111';"
                                onmouseout="this.style.background='#f8fafc'; this.style.color='#64748b';">
-                                <i class="fa fa-twitter"></i>
+                                <i class="fa fa-youtube"></i>
                             </a>
-                            <a href="#" style="
+                            <a href="https://instagram.com/aldsplnzr" target="_blank" style="
                                 width: 40px; height: 40px;
                                 border-radius: 10px;
                                 border: 1.5px solid #e2e8f0;
@@ -712,7 +727,7 @@ Membantu bisnis meningkatkan efisiensi dan produktivitas melalui teknologi' }}</
                                onmouseout="this.style.background='#f8fafc'; this.style.color='#64748b';">
                                 <i class="fa fa-instagram"></i>
                             </a>
-                            <a href="#" style="
+                            <a href="https://tiktok.com/@aldyysn3" target="_blank" style="
                                 width: 40px; height: 40px;
                                 border-radius: 10px;
                                 border: 1.5px solid #e2e8f0;
@@ -723,7 +738,7 @@ Membantu bisnis meningkatkan efisiensi dan produktivitas melalui teknologi' }}</
                                 font-size: 0.9rem;
                             " onmouseover="this.style.background='#F5C41A'; this.style.color='#111';"
                                onmouseout="this.style.background='#f8fafc'; this.style.color='#64748b';">
-                                <i class="fa fa-linkedin"></i>
+                                <i class="fa fa-tiktok"></i>
                             </a>
                         </div>
                     </div>
@@ -755,10 +770,10 @@ Membantu bisnis meningkatkan efisiensi dan produktivitas melalui teknologi' }}</
                         </a>
                         <p>{{ $company->description ? Str::limit($company->description, 120) : 'Solusi digital terpercaya untuk bisnis Anda.' }}</p>
                         <div class="ve-social">
-                            <a href="#"><i class="fa fa-facebook"></i></a>
-                            <a href="#"><i class="fa fa-twitter"></i></a>
-                            <a href="#"><i class="fa fa-linkedin"></i></a>
-                            <a href="#"><i class="fa fa-instagram"></i></a>
+                            <a href="https://facebook.com/aldisaefulnizar" target="_blank"><i class="fa fa-facebook"></i></a>
+                            <a href="https://tiktok.com/@aldyysn3" target="_blank"><i class="fa fa-tiktok"></i></a>
+                            <a href="https://youtube.com/@jamet1572" target="_blank"><i class="fa fa-youtube"></i></a>
+                            <a href="https://instagram.com/aldsplnzr" target="_blank"><i class="fa fa-instagram"></i></a>
                         </div>
                     </div>
                 </div>

@@ -31,4 +31,6 @@ class CompanyProfileController extends Controller
         return redirect()->route('admin.company.edit')
                          ->with('success', 'Profil perusahaan berhasil diupdate!');
     }
+
+    
 }

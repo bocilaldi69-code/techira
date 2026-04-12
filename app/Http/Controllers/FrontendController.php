@@ -13,19 +13,10 @@ class FrontendController extends Controller
 {
     public function index()
     {
-        // Ambil company profile, jika belum ada buat object default (tidak disimpan ke DB)
-        // Ini mencegah error "Attempt to read property on null"
-        $company = CompanyProfile::first() ?? new CompanyProfile([
-            'company_name' => 'Techira Indonesia',
-            'tagline'      => 'Solusi Digital Terbaik Untuk Bisnis Anda',
-            'description'  => 'Kami hadir untuk membantu bisnis Anda berkembang dengan solusi teknologi yang inovatif dan terpercaya.',
-            'vision'       => 'Menjadi perusahaan teknologi terdepan dan terpercaya di Indonesia.',
-            'mission'      => 'Menghadirkan solusi digital inovatif yang memberikan nilai nyata bagi setiap klien.',
-        ]);
-
-        $services   = Service::latest()->get();
-        $portfolios = Portfolio::latest()->get();
-        $teams      = Team::latest()->get();
+        $company    = CompanyProfile::first();
+        $services   = Service::all();
+        $portfolios = Portfolio::all();
+        $teams      = Team::all();
 
         return view('frontend.index', compact(
             'company',
@@ -49,6 +40,6 @@ class FrontendController extends Controller
             'message' => $request->message,
         ]);
 
-        return redirect()->back()->with('success', 'Pesan Anda telah berhasil dikirim! Kami akan segera menghubungi Anda.');
+        return redirect()->back()->with('success', 'Pesan berhasil dikirim! Kami akan segera menghubungi Anda.');
     }
 }
